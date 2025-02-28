@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFake Detection System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Main Content */
+        .main-content .lead {
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Feature Cards */
+        .feature-cards {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 40%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card i {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .primary {
+            background: #007bff;
+        }
+
+        .secondary {
+            background: #28a745;
+        }
+
+        /* Auth Section */
+        .auth-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-buttons {
+            margin-top: 10px;
+        }
+
+        .auth-buttons .btn {
+            margin-right: 10px;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .step {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .step i {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .feature-cards, .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card, .step {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to DeepFake Detection System</h1>
+        </div>
+
+        <div class="main-content">
+            <p class="lead">This platform helps you identify manipulated media by using advanced deep learning techniques.</p>
+
+            <div class="feature-cards">
+                <div class="card">
+                    <i class="fas fa-image fa-3x"></i>
+                    <h3>Image Analysis</h3>
+                    <p>Upload photos to detect if they've been artificially manipulated</p>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-video fa-3x"></i>
+                    <h3>Video Analysis</h3>
+                    <p>Process videos to identify deepfake content frame by frame</p>
+                </div>
+            </div>
+
+            {% if 'user_id' in session %}
+            <div class="action-button">
+                <a href="{{ url_for('predict') }}" class="btn primary">
+                    <i class="fas fa-search"></i> Start Detecting
+                </a>
+            </div>
+            {% else %}
+            <div class="auth-section">
+                <p>Please log in or sign up to use the detection system</p>
+                <div class="auth-buttons">
+                    <a href="{{ url_for('login') }}" class="btn primary">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="{{ url_for('signup') }}" class="btn secondary">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <i class="fas fa-upload fa-2x"></i>
+                    <h4>1. Upload</h4>
+                    <p>Upload your image or video file</p>
+                </div>
+
+                <div class="step">
+                    <i class="fas fa-cogs fa-2x"></i>
+                    <h4>2. Process</h4>
+                    <p>Our AI model analyzes the content</p>
+                </div>
+
+                <div class="step">
+                    <i class="fas fa-download fa-2x"></i>
+                    <h4>3. Results</h4>
+                    <p>Download the analysis result</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

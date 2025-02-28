@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DeepFake Detection System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-hover: #3a56d4;
+            --success-color: #2ec4b6;
+            --success-hover: #29b0a3;
+            --secondary-color: #6c757d;
+            --secondary-hover: #5a6268;
+            --info-color: #4cc9f0;
+            --warning-color: #ff9f1c;
+            --danger-color: #e71d36;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --body-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Header Section */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-300);
+        }
+
+        h1 {
+            color: var(--dark-color);
+            font-size: 2.25rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--gray-800);
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--gray-800);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.9375rem;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .success:hover {
+            background-color: var(--success-hover);
+        }
+
+        .secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .secondary:hover {
+            background-color: var(--secondary-hover);
+        }
+
+        .outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Content Section */
+        .content-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .blog-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-card p {
+            color: var(--gray-700);
+            margin-bottom: 1.25rem;
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--gray-200);
+            padding-top: 1rem;
+        }
+
+        .author {
+            color: var(--gray-600);
+            font-style: italic;
+            font-size: 0.875rem;
+        }
+
+        .read-more-btn {
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .panel {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            height: 100%;
+        }
+
+        /* Lists */
+        .activity-list, .links-list {
+            list-style: none;
+        }
+
+        .activity-list li, .links-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-list li:last-child, .links-list li:last-child {
+            border-bottom: none;
+        }
+
+        .links-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .links-list a:hover {
+            color: var(--primary-hover);
+        }
+
+        .badge {
+            background-color: var(--gray-200);
+            color: var(--gray-700);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+        }
+
+        /* Message Box */
+        .message-box {
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .info {
+            background-color: var(--info-color);
+            color: var(--dark-color);
+            opacity: 0.8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 5% auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 80%;
+            max-width: 800px;
+            animation: modalOpen 0.3s ease;
+        }
+
+        @keyframes modalOpen {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-300);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--gray-300);
+            text-align: right;
+        }
+
+        .close-button {
+            color: var(--gray-600);
+            font-size: 1.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-button:hover {
+            color: var(--danger-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .blog-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1>Dashboard</h1>
+            <div class="action-buttons">
+                <a href="{{ url_for('predict') }}" class="btn primary">
+                    <i class="fas fa-search"></i> Detect DeepFakes
+                </a>
+                {% if role == 'admin' %}
+                <a href="{{ url_for('add_blog') }}" class="btn success">
+                    <i class="fas fa-plus"></i> Add Blog Post
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Latest Blog Posts</h2>
+
+            {% if blogs %}
+                {% for blog in blogs %}
+                <div class="blog-card">
+                    <h3>{{ blog.title }}</h3>
+                    <p>{{ blog.content[:200] }}{% if blog.content|length > 200 %}...{% endif %}</p>
+                    <div class="blog-footer">
+                        <span class="author">Posted by: {{ blog.author }}</span>
+                        <button class="btn outline read-more-btn" onclick="openModal('blogModal{{ blog.id }}')">
+                            Read More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal for full blog post -->
+                <div id="blogModal{{ blog.id }}" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>{{ blog.title }}</h3>
+                            <span class="close-button" onclick="closeModal('blogModal{{ blog.id }}')">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{ blog.content }}</p>
+                            <p class="author">Posted by: {{ blog.author }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn secondary" onclick="closeModal('blogModal{{ blog.id }}')">Close</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="message-box info">
+                    <p>No blog posts available yet.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="two-column">
+            <div class="column">
+                <div class="panel">
+                    <h2>Recent Activities</h2>
+                    <ul class="activity-list">
+                        <li>
+                            <span>Model updated</span>
+                            <span class="badge">2 days ago</span>
+                        </li>
+                        <li>
+                            <span>System maintenance</span>
+                            <span class="badge">1 week ago</span>
+                        </li>
+                        <li>
+                            <span>New detection features added</span>
+                            <span class="badge">2 weeks ago</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="panel">
+                    <h2>Quick Links</h2>
+                    <ul class="links-list">
+                        <li>
+                            <a href="{{ url_for('predict') }}">
+                                <i class="fas fa-search"></i> Detect DeepFakes
+                            </a>
+                        </li>
+                        {% if role == 'admin' %}
+                        <li>
+                            <a href="{{ url_for('add_blog') }}">
+                                <i class="fas fa-plus"></i> Add New Blog Post
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-question-circle"></i> Help & Documentation
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+</body>
+</html>
